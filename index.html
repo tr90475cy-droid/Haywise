@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Ecstacy — Haywise Official | Scroll Animations + Smooth Flow</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg-deep: #0a0c10;
+      --bg-elevated: #12161c;
+      --bg-card: rgba(18, 22, 28, 0.85);
+      --text-primary: #f0f3f8;
+      --text-secondary: #b9c3d0;
+      --text-muted: #7f8c9a;
+      --accent-gold: #d4af37;
+      --accent-glow: #e8c45a;
+      --accent-soft: rgba(212, 175, 55, 0.12);
+      --shadow-md: 0 15px 35px rgba(0, 0, 0, 0.5);
+      --shadow-lg: 0 25px 50px rgba(0, 0, 0, 0.6);
+      --radius-md: 20px;
+      --radius-lg: 32px;
+      --transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg-deep);
+      color: var(--text-primary);
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+
+    /* ========== SMOOTH SCROLL + REVEAL ANIMATIONS ========== */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s cubic-bezier(0.2, 0.9, 0.4, 1.1), transform 0.8s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+    }
+    .fade-up.revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .fade-left {
+      opacity: 0;
+      transform: translateX(-35px);
+      transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+    }
+    .fade-left.revealed {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    .fade-right {
+      opacity: 0;
+      transform: translateX(35px);
+      transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+    }
+    .fade-right.revealed {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    .scale-in {
+      opacity: 0;
+      transform: scale(0.92);
+      transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.2, 0.9, 0.4, 1.2);
+    }
+    .scale-in.revealed {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    /* Hero Background with Artist Image */
+    .hero-bg {
+      position: relative;
+      min-height: 100vh;
+      background-image: url('IMG_4903.JPG.jpeg');
+      background-size: cover;
+      background-position: center 30%;
+      background-repeat: no-repeat;
+      isolation: isolate;
+    }
+
+    .hero-bg::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(10, 12, 16, 0.85) 0%, rgba(10, 12, 16, 0.7) 50%, rgba(0, 0, 0, 0.85) 100%);
+      z-index: 1;
+    }
+
+    .hero-bg .container {
+      position: relative;
+      z-index: 2;
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* Header with sticky + blur */
+    .header {
+      padding: 2rem 0 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+      margin-bottom: 3rem;
+      backdrop-filter: blur(8px);
+      transition: all 0.3s;
+    }
+
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      letter-spacing: -0.3px;
+      background: linear-gradient(135deg, #fff, var(--accent-gold));
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+    .logo i {
+      color: var(--accent-gold);
+      margin-right: 8px;
+    }
+
+    .nav {
+      display: flex;
+      gap: 2.5rem;
+      flex-wrap: wrap;
+    }
+    .nav a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.85rem;
+      transition: var(--transition);
+      letter-spacing: 0.5px;
+      position: relative;
+    }
+    .nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -6px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--accent-gold);
+      transition: width 0.3s ease;
+    }
+    .nav a:hover::after {
+      width: 100%;
+    }
+    .nav a:hover {
+      color: var(--accent-gold);
+    }
+
+    .hero-content {
+      padding: 3rem 0 6rem;
+      max-width: 650px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--accent-soft);
+      backdrop-filter: blur(4px);
+      color: var(--accent-gold);
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 0.4rem 1.2rem;
+      border-radius: 40px;
+      margin-bottom: 1.8rem;
+      border: 0.5px solid rgba(212, 175, 55, 0.4);
+    }
+
+    .hero-content h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 5.2rem;
+      font-weight: 700;
+      line-height: 1.05;
+      margin-bottom: 0.8rem;
+      letter-spacing: -0.02em;
+    }
+    .hero-content h1 span {
+      color: var(--accent-gold);
+      text-shadow: 0 0 12px rgba(212, 175, 55, 0.4);
+    }
+    .artist-tag {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--accent-gold);
+      margin-bottom: 1rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+    .hero-content p {
+      font-size: 1.05rem;
+      color: var(--text-secondary);
+      margin: 1.5rem 0;
+      line-height: 1.7;
+      max-width: 90%;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 1.2rem;
+      flex-wrap: wrap;
+      margin-top: 1.8rem;
+    }
+    .btn {
+      padding: 0.85rem 2.2rem;
+      font-weight: 600;
+      text-decoration: none;
+      border-radius: 50px;
+      transition: var(--transition);
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      border: none;
+      font-family: 'Inter', sans-serif;
+    }
+    .btn-primary {
+      background: linear-gradient(105deg, var(--accent-gold), #c9a03d);
+      color: #0a0c10;
+      box-shadow: 0 4px 14px rgba(212, 175, 55, 0.3);
+      font-weight: 700;
+    }
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(212, 175, 55, 0.5);
+    }
+    .btn-outline {
+      border: 1.5px solid var(--accent-gold);
+      background: rgba(10, 12, 16, 0.5);
+      backdrop-filter: blur(4px);
+      color: var(--accent-gold);
+    }
+    .btn-outline:hover {
+      background: var(--accent-gold);
+      color: #0a0c10;
+      transform: translateY(-2px);
+    }
+
+    section {
+      margin: 5rem 0;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      font-weight: 600;
+      margin-bottom: 2rem;
+      text-align: center;
+      letter-spacing: -0.3px;
+    }
+    .section-title i {
+      color: var(--accent-gold);
+      margin-right: 0.6rem;
+    }
+
+    /* DUAL VISUALIZER */
+    .visualizer-duo {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      margin: 2rem 0 3rem;
+    }
+    .viz-card {
+      flex: 1;
+      min-width: 260px;
+      background: rgba(0, 0, 0, 0.55);
+      backdrop-filter: blur(12px);
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(212, 175, 55, 0.4);
+      padding: 1.5rem 1rem;
+      transition: all 0.3s;
+    }
+    .viz-card:hover {
+      border-color: var(--accent-gold);
+      transform: translateY(-5px);
+    }
+    .viz-title {
+      text-align: center;
+      font-weight: 600;
+      color: var(--accent-gold);
+      margin-bottom: 1rem;
+      font-size: 0.9rem;
+    }
+    .canvas-wrapper {
+      display: flex;
+      justify-content: center;
+    }
+    #waveCanvas {
+      width: 100%;
+      height: 130px;
+      background: rgba(10, 12, 18, 0.6);
+      border-radius: 20px;
+    }
+    #ringCanvas {
+      width: 180px;
+      height: 180px;
+      background: rgba(10, 12, 18, 0.4);
+      border-radius: 50%;
+    }
+    .viz-control {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 1rem;
+    }
+    .viz-btn {
+      background: rgba(212, 175, 55, 0.15);
+      border: 1px solid var(--accent-gold);
+      color: var(--accent-gold);
+      padding: 6px 18px;
+      border-radius: 40px;
+      font-size: 0.7rem;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .viz-btn:hover {
+      background: var(--accent-gold);
+      color: #0a0c10;
+    }
+
+    /* Media showcase */
+    .media-showcase {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.8rem;
+      margin: 2rem 0 3rem;
+    }
+    .media-card {
+      background: var(--bg-card);
+      backdrop-filter: blur(8px);
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      overflow: hidden;
+      transition: all 0.4s;
+      cursor: pointer;
+    }
+    .media-card:hover {
+      transform: translateY(-8px) scale(1.01);
+      border-color: var(--accent-gold);
+      box-shadow: 0 20px 35px rgba(0,0,0,0.5);
+    }
+    .media-img {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      display: block;
+    }
+    .media-label {
+      padding: 1rem;
+      text-align: center;
+      font-weight: 600;
+      background: rgba(0,0,0,0.5);
+      color: var(--accent-gold);
+    }
+
+    /* Platform grid */
+    .platform-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1.2rem;
+    }
+    .platform-card {
+      background: var(--bg-card);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      padding: 1.2rem 0.5rem;
+      text-align: center;
+      border-radius: var(--radius-md);
+      transition: all 0.3s;
+      text-decoration: none;
+      color: var(--text-primary);
+    }
+    .platform-card:hover {
+      transform: translateY(-6px);
+      border-color: var(--accent-gold);
+      background: rgba(25, 30, 38, 0.95);
+    }
+    .platform-icon { font-size: 2rem; color: var(--accent-gold); margin-bottom: 0.5rem; }
+    .platform-name { font-weight: 600; font-size: 0.85rem; }
+
+    /* Song story */
+    .song-story {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+      background: var(--bg-card);
+      backdrop-filter: blur(12px);
+      padding: 2.5rem;
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(212, 175, 55, 0.25);
+    }
+    .story-text h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      color: var(--accent-gold);
+    }
+    .lyric-snippet {
+      background: rgba(212, 175, 55, 0.08);
+      padding: 1.5rem;
+      border-radius: var(--radius-md);
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      border-left: 4px solid var(--accent-gold);
+    }
+
+    /* Contact */
+    .contact-section {
+      background: var(--bg-card);
+      backdrop-filter: blur(12px);
+      padding: 3rem;
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+    }
+    .contact-flex {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 2.5rem;
+    }
+    .contact-info h3 { font-family: 'Playfair Display', serif; font-size: 1.7rem; color: var(--accent-gold); margin-bottom: 0.8rem; }
+    .contact-detail { margin: 1rem 0; display: flex; align-items: center; gap: 0.8rem; color: var(--text-secondary); }
+    .contact-detail i { width: 28px; color: var(--accent-gold); }
+    input, textarea {
+      width: 100%;
+      padding: 0.9rem 1rem;
+      background: #101418;
+      border: 1px solid #2a2e3a;
+      border-radius: 18px;
+      color: #f0f3f8;
+    }
+    input:focus, textarea:focus { border-color: var(--accent-gold); outline: none; box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.2); }
+    button[type="submit"] {
+      background: linear-gradient(95deg, var(--accent-gold), #b88d2c);
+      border: none;
+      padding: 0.9rem;
+      border-radius: 50px;
+      font-weight: 700;
+      width: 100%;
+      cursor: pointer;
+      color: #0a0c10;
+      transition: var(--transition);
+    }
+    button[type="submit"]:hover { transform: scale(1.01); box-shadow: 0 0 15px rgba(212, 175, 55, 0.5); }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin: 1.5rem 0 1rem;
+    }
+    .social-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: rgba(212, 175, 55, 0.1);
+      border: 1px solid rgba(212, 175, 55, 0.4);
+      color: var(--accent-gold);
+      font-size: 1.4rem;
+      transition: var(--transition);
+      text-decoration: none;
+    }
+    .social-icon:hover { background: var(--accent-gold); color: #0a0c10; transform: translateY(-4px); }
+
+    footer { text-align: center; padding: 2.5rem 0 2rem; border-top: 1px solid rgba(212, 175, 55, 0.2); font-size: 0.75rem; color: var(--text-muted); }
+
+    @media (max-width: 900px) {
+      .hero-content h1 { font-size: 3.2rem; }
+      .song-story, .contact-flex, .media-showcase, .visualizer-duo { grid-template-columns: 1fr; flex-direction: column; }
+      .container { padding: 0 1.2rem; }
+    }
+    .text-center { text-align: center; }
+  </style>
+</head>
+<body>
+
+<!-- Hero Section -->
+<div class="hero-bg" id="home">
+  <div class="container">
+    <header class="header fade-up">
+      <div class="logo"><i class="fas fa-crown"></i> HAYWISE // ECSTACY</div>
+      <div class="nav">
+        <a href="#stream"><i class="fas fa-headphones"></i> STREAM</a>
+        <a href="#story"><i class="fas fa-feather-alt"></i> STORY</a>
+        <a href="#video"><i class="fas fa-film"></i> VIDEO</a>
+        <a href="#contact"><i class="fas fa-star"></i> CONTACT</a>
+      </div>
+    </header>
+    <div class="hero-content">
+      <div class="badge fade-up"><i class="fas fa-microphone-alt"></i> NEW SINGLE 2026</div>
+      <h1 class="fade-up">ECST<span>ACY</span></h1>
+      <div class="artist-tag fade-up">Haywise Official · Afro-Fusion Anthem</div>
+      <p class="fade-up">A euphoric, pulse-driving journey into rhythm and emotion. Blending Yoruba soul with contemporary production, “Ecstacy” is made for late nights, dancefloors, and total release.</p>
+      <div class="btn-group fade-up">
+        <a href="#stream" class="btn btn-primary"><i class="fas fa-play"></i> STREAM NOW</a>
+        <a href="#contact" class="btn btn-outline"><i class="fas fa-calendar-alt"></i> BOOKING</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <!-- DUAL VISUALIZERS -->
+  <div class="visualizer-duo">
+    <div class="viz-card scale-in">
+      <div class="viz-title"><i class="fas fa-chart-line"></i> ENERGY WAVE</div>
+      <div class="canvas-wrapper"><canvas id="waveCanvas" width="800" height="130" style="width:100%; height:130px;"></canvas></div>
+      <div class="viz-control"><button id="playWaveBtn" class="viz-btn"><i class="fas fa-play"></i> ANIMATE</button><button id="stopWaveBtn" class="viz-btn"><i class="fas fa-stop"></i> STOP</button></div>
+    </div>
+    <div class="viz-card scale-in">
+      <div class="viz-title"><i class="fas fa-circle-notch"></i> SPECTRUM RING</div>
+      <div class="canvas-wrapper"><canvas id="ringCanvas" width="200" height="200" style="width:180px; height:180px;"></canvas></div>
+      <div class="viz-control"><button id="playRingBtn" class="viz-btn"><i class="fas fa-play"></i> ROTATE</button><button id="stopRingBtn" class="viz-btn"><i class="fas fa-stop"></i> FREEZE</button></div>
+    </div>
+  </div>
+
+  <!-- YOUTUBE IMAGE CARDS -->
+  <div class="media-showcase" id="video">
+    <div class="media-card fade-left" id="youtubeCardLeft">
+      <img class="media-img" src="IMG_5238.JPG.jpeg" alt="Official Video">
+      <div class="media-label"><i class="fab fa-youtube"></i> OFFICIAL MUSIC VIDEO</div>
+    </div>
+    <div class="media-card fade-right" id="youtubeCardRight">
+      <img class="media-img" src="IMG_4904.JPG.jpeg" alt="BTS Teaser">
+      <div class="media-label"><i class="fas fa-video"></i> BTS / VISUAL TEASER</div>
+    </div>
+  </div>
+
+  <!-- STREAMING SECTION -->
+  <section id="stream">
+    <div class="section-title fade-up"><i class="fas fa-music"></i> STREAM "ECSTACY"</div>
+    <div class="platform-grid">
+      <a href="https://open.spotify.com/artist/2IwiPvxH6yY4yPVXJVrtdZ" target="_blank" class="platform-card scale-in"><div class="platform-icon"><i class="fab fa-spotify"></i></div><div class="platform-name">Spotify</div></a>
+      <a href="https://music.apple.com/us/playlist/haywise-officials-2025-tour-set-list/pl.e353df25ed2f43cb9f25ef264cb9c608" target="_blank" class="platform-card scale-in"><div class="platform-icon"><i class="fab fa-apple"></i></div><div class="platform-name">Apple Music</div></a>
+      <a href="https://www.youtube.com/channel/UCFMFRtH-pMGQcHHon8k1_3Q" target="_blank" class="platform-card scale-in"><div class="platform-icon"><i class="fab fa-youtube"></i></div><div class="platform-name">YouTube Music</div></a>
+      <a href="https://www.amazon.com/s?k=haywise+official+music" target="_blank" class="platform-card scale-in"><div class="platform-icon"><i class="fab fa-amazon"></i></div><div class="platform-name">Amazon Music</div></a>
+      <a href="https://soundcloud.com/search?q=haywise%20official" target="_blank" class="platform-card scale-in"><div class="platform-icon"><i class="fab fa-soundcloud"></i></div><div class="platform-name">SoundCloud</div></a>
+      <a href="https://www.deezer.com/search/haywise%20official" target="_blank" class="platform-card scale-in"><div class="platform-icon"><i class="fab fa-deezer"></i></div><div class="platform-name">Deezer</div></a>
+      <a href="https://tidal.com/artist/10588376" target="_blank" class="platform-card scale-in"><div class="platform-icon"><i class="fas fa-water"></i></div><div class="platform-name">Tidal</div></a>
+      <a href="https://music.youtube.com/search?q=haywise+official" target="_blank" class="platform-card scale-in"><div class="platform-icon"><i class="fab fa-youtube"></i></div><div class="platform-name">YouTube</div></a>
+    </div>
+  </section>
+
+  <!-- STORY SECTION -->
+  <section id="story">
+    <div class="song-story">
+      <div class="story-text fade-left">
+        <h3><i class="fas fa-moon"></i> THE ESSENCE</h3>
+        <p>"Ecstacy" is a euphoric, pulse-driving Afro-fusion anthem built for midnight escapes and transcendent dancefloor moments. Blending soulful Yoruba-infused melodies with hypnotic rhythms, the track captures the overwhelming rush of pure joy, emotional freedom, and unapologetic bliss.</p>
+        <p style="margin-top: 1rem;">From smooth, rhythmic verses to infectious choruses, <strong style="color: var(--accent-gold);">ECSTACY</strong> delivers a feel-good vibe that’s all about letting go.</p>
+      </div>
+      <div class="lyric-snippet fade-right">
+        <i class="fas fa-music"></i> <strong>LYRIC SNIPPET</strong><br>
+        “Hello what's your name?<br> Gimme your number baby what you say?<br> I wanna be with you, No be fallacy<br> Oh baby duro na, Maje n tete de”<br>
+        <span style="font-size:0.7rem; margin-top:12px; display:block;">#Ecstacy #HaywiseOfficial</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="contact-section">
+      <div class="contact-flex">
+        <div class="contact-info fade-left">
+          <h3>BOOK HAYWISE <i class="fas fa-hand-peace"></i></h3>
+          <p>For features, live shows, sync licensing — drop a message.</p>
+          <div class="contact-detail"><i class="fas fa-envelope"></i> booking@haywiseofficial.com</div>
+          <div style="margin: 1.5rem 0 0.5rem;">
+            <p style="color: var(--accent-gold);"><i class="fas fa-share-alt"></i> FOLLOW HAYWISE</p>
+            <div style="display: flex; gap: 1rem; margin-top: 0.8rem;">
+              <a href="https://instagram.com/haywise_off" target="_blank" class="social-icon" style="width:44px; height:44px;"><i class="fab fa-instagram"></i></a>
+              <a href="https://facebook.com/haywiseofficial" target="_blank" class="social-icon" style="width:44px; height:44px;"><i class="fab fa-facebook-f"></i></a>
+              <a href="https://tiktok.com/@haywise.music" target="_blank" class="social-icon" style="width:44px; height:44px;"><i class="fab fa-tiktok"></i></a>
+              <a href="https://twitter.com/haywise_off" target="_blank" class="social-icon" style="width:44px; height:44px;"><i class="fab fa-twitter"></i></a>
+            </div>
+          </div>
+        </div>
+        <form id="bookingForm" class="fade-right">
+          <div class="form-group"><input type="text" placeholder="Your name / label" id="bookName" required></div>
+          <div class="form-group"><input type="email" placeholder="Email address" id="bookEmail" required></div>
+          <div class="form-group"><textarea rows="3" placeholder="Event / collab request / message" id="bookMsg"></textarea></div>
+          <button type="submit"><i class="fas fa-paper-plane"></i> SEND REQUEST</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="social-links">
+      <a href="https://instagram.com/haywise_off" target="_blank" class="social-icon"><i class="fab fa-instagram"></i></a>
+      <a href="https://facebook.com/haywiseofficial" target="_blank" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+      <a href="https://tiktok.com/@haywise.music" target="_blank" class="social-icon"><i class="fab fa-tiktok"></i></a>
+      <a href="https://twitter.com/haywise_off" target="_blank" class="social-icon"><i class="fab fa-twitter"></i></a>
+    </div>
+    <p>◈ ECSTACY / HAYWISE OFFICIAL — Stream everywhere. Let the rhythm take control. ◈</p>
+  </footer>
+</div>
+
+<script>
+  // ========== SMOOTH SCROLL REVEAL (Intersection Observer) ==========
+  const revealElements = document.querySelectorAll('.fade-up, .fade-left, .fade-right, .scale-in');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('revealed');
+        observer.unobserve(entry.target); // once revealed, stop observing
+      }
+    });
+  }, { threshold: 0.12, rootMargin: "0px 0px -30px 0px" });
+  revealElements.forEach(el => observer.observe(el));
+  // Also ensure header/hero elements reveal quickly
+  document.querySelectorAll('.hero-content .fade-up, .header.fade-up').forEach(el => observer.observe(el));
+
+  // ========== WAVE VISUALIZER ==========
+  const waveCanvas = document.getElementById('waveCanvas');
+  const ctxWave = waveCanvas.getContext('2d');
+  let waveAnimId = null;
+  let waveActive = true;
+  function resizeWave() { const w = waveCanvas.parentElement.clientWidth; waveCanvas.width = w; waveCanvas.height = 130; }
+  window.addEventListener('resize', resizeWave);
+  resizeWave();
+  const barCount = 48;
+  let waveBars = Array(barCount).fill(0.15);
+  function updateWaveBars() {
+    for (let i = 0; i < barCount; i++) {
+      let target = 0.25 + 0.55 * (Math.sin(Date.now() * 0.0045 + i * 0.22) * 0.6 + Math.sin(Date.now() * 0.011 + i * 0.41) * 0.4);
+      target += Math.random() * 0.1;
+      target = Math.min(0.92, Math.max(0.12, target));
+      waveBars[i] = waveBars[i] * 0.9 + target * 0.1;
+    }
+  }
+  function drawWave() {
+    ctxWave.clearRect(0, 0, waveCanvas.width, waveCanvas.height);
+    const w = waveCanvas.width, h = waveCanvas.height;
+    const barWidth = w / barCount * 0.8, spacing = w / barCount * 0.2;
+    for (let i = 0; i < barCount; i++) {
+      const barHeight = Math.max(4, waveBars[i] * h * 0.85);
+      const x = i * (barWidth + spacing);
+      const grad = ctxWave.createLinearGradient(0, h - barHeight, 0, h);
+      grad.addColorStop(0, '#d4af37'); grad.addColorStop(1, '#f9e186');
+      ctxWave.fillStyle = grad;
+      ctxWave.shadowBlur = 6; ctxWave.shadowColor = '#d4af37aa';
+      ctxWave.fillRect(x, h - barHeight, barWidth, barHeight);
+    }
+    ctxWave.shadowBlur = 0;
+  }
+  function animateWave() { if (!waveActive) return; updateWaveBars(); drawWave(); waveAnimId = requestAnimationFrame(animateWave); }
+  document.getElementById('playWaveBtn').addEventListener('click', () => { if (!waveActive) { waveActive = true; animateWave(); } });
+  document.getElementById('stopWaveBtn').addEventListener('click', () => { if (waveAnimId) cancelAnimationFrame(waveAnimId); waveActive = false; waveBars.fill(0.1); drawWave(); });
+  waveActive = true; animateWave();
+
+  // ========== RING VISUALIZER ==========
+  const ringCanvas = document.getElementById('ringCanvas');
+  const ctxRing = ringCanvas.getContext('2d');
+  let ringAnimId = null, ringActive = true, angleOffset = 0;
+  const ringsCount = 24;
+  let ringAmplitudes = Array(ringsCount).fill(0.2);
+  ringCanvas.width = 200; ringCanvas.height = 200;
+  function updateRing() {
+    angleOffset += 0.008;
+    for (let i = 0; i < ringsCount; i++) {
+      let dynamic = 0.3 + 0.5 * (Math.sin(Date.now() * 0.005 + i * 0.5) * 0.7 + Math.cos(Date.now() * 0.009 + i * 0.3) * 0.3);
+      dynamic += Math.sin(angleOffset + i) * 0.1;
+      dynamic = Math.min(0.95, Math.max(0.2, dynamic));
+      ringAmplitudes[i] = ringAmplitudes[i] * 0.92 + dynamic * 0.08;
+    }
+  }
+  function drawRing() {
+    ctxRing.clearRect(0, 0, ringCanvas.width, ringCanvas.height);
+    const cx = ringCanvas.width/2, cy = ringCanvas.height/2;
+    const baseRadius = 48, maxExtra = 38;
+    for (let i = 0; i < ringsCount; i++) {
+      const angle = (i / ringsCount) * Math.PI * 2 + angleOffset;
+      const radius = baseRadius + ringAmplitudes[i] * maxExtra;
+      const x = cx + Math.cos(angle) * radius, y = cy + Math.sin(angle) * radius;
+      const ix = cx + Math.cos(angle) * (baseRadius - 6), iy = cy + Math.sin(angle) * (baseRadius - 6);
+      ctxRing.beginPath(); ctxRing.moveTo(ix, iy); ctxRing.lineTo(x, y);
+      ctxRing.lineWidth = 3.5;
+      ctxRing.strokeStyle = `rgba(212, 175, 55, ${0.6 + ringAmplitudes[i] * 0.4})`;
+      ctxRing.shadowBlur = 8; ctxRing.shadowColor = '#e8c45a';
+      ctxRing.stroke();
+      ctxRing.beginPath(); ctxRing.arc(x, y, 3 + ringAmplitudes[i] * 2, 0, Math.PI*2);
+      ctxRing.fillStyle = `rgba(255, 215, 80, ${0.7 + ringAmplitudes[i]*0.3})`;
+      ctxRing.fill();
+    }
+    ctxRing.beginPath(); ctxRing.arc(cx, cy, 28, 0, Math.PI*2);
+    ctxRing.fillStyle = 'rgba(212,175,55,0.15)'; ctxRing.fill();
+    ctxRing.beginPath(); ctxRing.arc(cx, cy, 22, 0, Math.PI*2);
+    ctxRing.fillStyle = '#d4af37'; ctxRing.shadowBlur = 12; ctxRing.fill();
+    ctxRing.shadowBlur = 0;
+  }
+  function animateRing() { if (!ringActive) return; updateRing(); drawRing(); ringAnimId = requestAnimationFrame(animateRing); }
+  document.getElementById('playRingBtn').addEventListener('click', () => { if (!ringActive) { ringActive = true; animateRing(); } });
+  document.getElementById('stopRingBtn').addEventListener('click', () => { if (ringAnimId) cancelAnimationFrame(ringAnimId); ringActive = false; ringAmplitudes.fill(0.25); drawRing(); });
+  ringActive = true; animateRing();
+
+  // YouTube cards placeholder links
+  document.getElementById('youtubeCardLeft').addEventListener('click', () => window.open('https://youtu.be/9I8xndQCSx0?si=Yd1eg6fCN88JN-71', '_blank'));
+  document.getElementById('youtubeCardRight').addEventListener('click', () => window.open('https://youtu.be/iIc0oSF0Xns?si=5v4Vd4Vvnq3ztXZX'));
+
+  // Booking form
+  document.getElementById('bookingForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const name = document.getElementById('bookName').value.trim();
+    const email = document.getElementById('bookEmail').value.trim();
+    if (!name || !email) return alert('Please enter name and email.');
+    alert(`✅ Thanks ${name}! Your inquiry has been received.`);
+    e.target.reset();
+  });
+</script>
+</body>
+</html>
