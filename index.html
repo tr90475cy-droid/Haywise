@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Ecstacy — Haywise Official | Scroll Animations + Smooth Flow</title>
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <title>Haywise Official | Music & Visuals</title>
+  <!-- MODERN FONTS: clean sans + elegant serif (less playful, more refined) -->
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
   <!-- Font Awesome 6 -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
@@ -37,11 +37,18 @@
     }
 
     body {
-      font-family: 'Inter', sans-serif;
+      font-family: 'Plus Jakarta Sans', sans-serif;
       background: var(--bg-deep);
       color: var(--text-primary);
       line-height: 1.5;
       overflow-x: hidden;
+    }
+
+    /* refined headings */
+    h1, h2, h3, .logo, .section-title, .story-text h3, .contact-info h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 500;
+      letter-spacing: -0.01em;
     }
 
     /* ========== SMOOTH SCROLL + REVEAL ANIMATIONS ========== */
@@ -112,7 +119,7 @@
       padding: 0 2rem;
     }
 
-    /* Header with sticky + blur */
+    /* Header with Logo & Navigation */
     .header {
       padding: 2rem 0 1.5rem;
       display: flex;
@@ -123,22 +130,27 @@
       border-bottom: 1px solid rgba(212, 175, 55, 0.3);
       margin-bottom: 3rem;
       backdrop-filter: blur(8px);
-      transition: all 0.3s;
     }
 
     .logo {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 1.6rem;
       font-weight: 600;
-      letter-spacing: -0.3px;
       background: linear-gradient(135deg, #fff, var(--accent-gold));
       background-clip: text;
       -webkit-background-clip: text;
       color: transparent;
     }
-    .logo i {
-      color: var(--accent-gold);
-      margin-right: 8px;
+    .logo-img {
+      height: 48px;
+      width: auto;
+      filter: drop-shadow(0 0 6px rgba(212,175,55,0.5));
+    }
+    .logo-text {
+      font-family: 'Cormorant Garamond', serif;
+      letter-spacing: 1px;
     }
 
     .nav {
@@ -193,12 +205,10 @@
     }
 
     .hero-content h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: 5.2rem;
-      font-weight: 700;
+      font-size: 5rem;
+      font-weight: 600;
       line-height: 1.05;
       margin-bottom: 0.8rem;
-      letter-spacing: -0.02em;
     }
     .hero-content h1 span {
       color: var(--accent-gold);
@@ -211,9 +221,10 @@
       margin-bottom: 1rem;
       letter-spacing: 2px;
       text-transform: uppercase;
+      font-family: 'Plus Jakarta Sans', sans-serif;
     }
     .hero-content p {
-      font-size: 1.05rem;
+      font-size: 1rem;
       color: var(--text-secondary);
       margin: 1.5rem 0;
       line-height: 1.7;
@@ -238,7 +249,7 @@
       font-size: 0.9rem;
       cursor: pointer;
       border: none;
-      font-family: 'Inter', sans-serif;
+      font-family: 'Plus Jakarta Sans', sans-serif;
     }
     .btn-primary {
       background: linear-gradient(105deg, var(--accent-gold), #c9a03d);
@@ -266,12 +277,10 @@
       margin: 5rem 0;
     }
     .section-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.2rem;
+      font-size: 2.4rem;
       font-weight: 600;
       margin-bottom: 2rem;
       text-align: center;
-      letter-spacing: -0.3px;
     }
     .section-title i {
       color: var(--accent-gold);
@@ -305,6 +314,7 @@
       color: var(--accent-gold);
       margin-bottom: 1rem;
       font-size: 0.9rem;
+      font-family: 'Plus Jakarta Sans', sans-serif;
     }
     .canvas-wrapper {
       display: flex;
@@ -337,13 +347,14 @@
       font-size: 0.7rem;
       cursor: pointer;
       transition: var(--transition);
+      font-weight: 600;
     }
     .viz-btn:hover {
       background: var(--accent-gold);
       color: #0a0c10;
     }
 
-    /* Media showcase */
+    /* SONG REVIEW IMAGE CARDS (replacing video with review images) */
     .media-showcase {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -376,6 +387,7 @@
       font-weight: 600;
       background: rgba(0,0,0,0.5);
       color: var(--accent-gold);
+      font-family: 'Plus Jakarta Sans', sans-serif;
     }
 
     /* Platform grid */
@@ -403,7 +415,7 @@
     .platform-icon { font-size: 2rem; color: var(--accent-gold); margin-bottom: 0.5rem; }
     .platform-name { font-weight: 600; font-size: 0.85rem; }
 
-    /* Song story */
+    /* Story section - now describing full discography */
     .song-story {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -415,18 +427,37 @@
       border: 1px solid rgba(212, 175, 55, 0.25);
     }
     .story-text h3 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.8rem;
+      font-size: 2rem;
       margin-bottom: 1rem;
+      color: var(--accent-gold);
+    }
+    .story-text p {
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+    .album-list {
+      margin-top: 1.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .album-badge {
+      background: rgba(212,175,55,0.15);
+      padding: 0.4rem 1rem;
+      border-radius: 40px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      border: 0.5px solid rgba(212,175,55,0.5);
       color: var(--accent-gold);
     }
     .lyric-snippet {
       background: rgba(212, 175, 55, 0.08);
       padding: 1.5rem;
       border-radius: var(--radius-md);
-      font-family: 'Playfair Display', serif;
+      font-family: 'Cormorant Garamond', serif;
       font-style: italic;
       border-left: 4px solid var(--accent-gold);
+      color: #e6e9f0;
     }
 
     /* Contact */
@@ -442,7 +473,7 @@
       grid-template-columns: 1fr 1.2fr;
       gap: 2.5rem;
     }
-    .contact-info h3 { font-family: 'Playfair Display', serif; font-size: 1.7rem; color: var(--accent-gold); margin-bottom: 0.8rem; }
+    .contact-info h3 { font-size: 1.8rem; color: var(--accent-gold); margin-bottom: 0.8rem; }
     .contact-detail { margin: 1rem 0; display: flex; align-items: center; gap: 0.8rem; color: var(--text-secondary); }
     .contact-detail i { width: 28px; color: var(--accent-gold); }
     input, textarea {
@@ -452,6 +483,7 @@
       border: 1px solid #2a2e3a;
       border-radius: 18px;
       color: #f0f3f8;
+      font-family: 'Plus Jakarta Sans', sans-serif;
     }
     input:focus, textarea:focus { border-color: var(--accent-gold); outline: none; box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.2); }
     button[type="submit"] {
@@ -464,6 +496,7 @@
       cursor: pointer;
       color: #0a0c10;
       transition: var(--transition);
+      font-family: 'Plus Jakarta Sans', sans-serif;
     }
     button[type="submit"]:hover { transform: scale(1.01); box-shadow: 0 0 15px rgba(212, 175, 55, 0.5); }
 
@@ -495,6 +528,7 @@
       .hero-content h1 { font-size: 3.2rem; }
       .song-story, .contact-flex, .media-showcase, .visualizer-duo { grid-template-columns: 1fr; flex-direction: column; }
       .container { padding: 0 1.2rem; }
+      .logo-img { height: 38px; }
     }
     .text-center { text-align: center; }
   </style>
@@ -505,21 +539,25 @@
 <div class="hero-bg" id="home">
   <div class="container">
     <header class="header fade-up">
-      <div class="logo"><i class="fas fa-crown"></i> HAYWISE // ECSTACY</div>
+      <div class="logo">
+        <!-- HAYWISE LOGO PLACEHOLDER (replace with actual logo image) -->
+        <img src="NAME-CRAFT-PNG1.png" alt="Haywise Logo" class="logo-img" id="artistLogo">
+        <span class="logo-text">HAYWISE</span>
+      </div>
       <div class="nav">
-        <a href="#stream"><i class="fas fa-headphones"></i> STREAM</a>
-        <a href="#story"><i class="fas fa-feather-alt"></i> STORY</a>
-        <a href="#video"><i class="fas fa-film"></i> VIDEO</a>
+        <a href="#stream"><i class="fas fa-headphones"></i> MUSIC</a>
+        <a href="#story"><i class="fas fa-feather-alt"></i> BIOGRAPHY</a>
+        <a href="#reviews"><i class="fas fa-star"></i> REVIEWS</a>
         <a href="#contact"><i class="fas fa-star"></i> CONTACT</a>
       </div>
     </header>
     <div class="hero-content">
-      <div class="badge fade-up"><i class="fas fa-microphone-alt"></i> NEW SINGLE 2026</div>
-      <h1 class="fade-up">ECST<span>ACY</span></h1>
-      <div class="artist-tag fade-up">Haywise Official · Afro-Fusion Anthem</div>
-      <p class="fade-up">A euphoric, pulse-driving journey into rhythm and emotion. Blending Yoruba soul with contemporary production, “Ecstacy” is made for late nights, dancefloors, and total release.</p>
+      <div class="badge fade-up"><i class="fas fa-microphone-alt"></i> FULL DISCOGRAPHY</div>
+      <h1 class="fade-up">THE <span>ARTIST</span></h1>
+      <div class="artist-tag fade-up">Haywise Official · Afro-Fusion Visionary</div>
+      <p class="fade-up">Explore the sonic universe of Haywise — a blend of Yoruba soul, contemporary Afro-fusion, and hypnotic rhythms. From "Ecstacy" to future anthems, every track is a journey into emotion and groove.</p>
       <div class="btn-group fade-up">
-        <a href="#stream" class="btn btn-primary"><i class="fas fa-play"></i> STREAM NOW</a>
+        <a href="#stream" class="btn btn-primary"><i class="fas fa-play"></i> DISCOVER MUSIC</a>
         <a href="#contact" class="btn btn-outline"><i class="fas fa-calendar-alt"></i> BOOKING</a>
       </div>
     </div>
@@ -527,7 +565,7 @@
 </div>
 
 <div class="container">
-  <!-- DUAL VISUALIZERS -->
+  <!-- DUAL VISUALIZERS (keep animations) -->
   <div class="visualizer-duo">
     <div class="viz-card scale-in">
       <div class="viz-title"><i class="fas fa-chart-line"></i> ENERGY WAVE</div>
@@ -541,21 +579,21 @@
     </div>
   </div>
 
-  <!-- YOUTUBE IMAGE CARDS -->
-  <div class="media-showcase" id="video">
-    <div class="media-card fade-left" id="youtubeCardLeft">
-      <img class="media-img" src="IMG_5238.JPG.jpeg" alt="Official Video">
-      <div class="media-label"><i class="fab fa-youtube"></i> OFFICIAL MUSIC VIDEO</div>
+  <!-- SONG REVIEW IMAGES (replacing video section) -->
+  <div class="media-showcase" id="reviews">
+    <div class="media-card fade-left" id="reviewCardLeft">
+      <img class="media-img" src="image.png" alt="Song Review Image 1">
+      <div class="media-label"><i class="fas fa-newspaper"></i> ECSTACY — SONG REVIEW</div>
     </div>
-    <div class="media-card fade-right" id="youtubeCardRight">
-      <img class="media-img" src="IMG_4904.JPG.jpeg" alt="BTS Teaser">
-      <div class="media-label"><i class="fas fa-video"></i> BTS / VISUAL TEASER</div>
+    <div class="media-card fade-right" id="reviewCardRight">
+      <img class="media-img" src="Screenshot 2026-04-22 121425.png" alt="Song Review Image 2">
+      <div class="media-label"><i class="fas fa-star"></i> " JAILER VISUALIZER " </div>
     </div>
   </div>
 
-  <!-- STREAMING SECTION -->
+  <!-- STREAMING SECTION (all albums / music) -->
   <section id="stream">
-    <div class="section-title fade-up"><i class="fas fa-music"></i> STREAM "ECSTACY"</div>
+    <div class="section-title fade-up"><i class="fas fa-music"></i> STREAM ALL ALBUMS & SINGLES</div>
     <div class="platform-grid">
       <a href="https://open.spotify.com/artist/2IwiPvxH6yY4yPVXJVrtdZ" target="_blank" class="platform-card scale-in"><div class="platform-icon"><i class="fab fa-spotify"></i></div><div class="platform-name">Spotify</div></a>
       <a href="https://music.apple.com/us/playlist/haywise-officials-2025-tour-set-list/pl.e353df25ed2f43cb9f25ef264cb9c608" target="_blank" class="platform-card scale-in"><div class="platform-icon"><i class="fab fa-apple"></i></div><div class="platform-name">Apple Music</div></a>
@@ -568,29 +606,36 @@
     </div>
   </section>
 
-  <!-- STORY SECTION -->
+  <!-- BIOGRAPHY + DISCOGRAPHY SECTION -->
   <section id="story">
     <div class="song-story">
       <div class="story-text fade-left">
-        <h3><i class="fas fa-moon"></i> THE ESSENCE</h3>
-        <p>"Ecstacy" is a euphoric, pulse-driving Afro-fusion anthem built for midnight escapes and transcendent dancefloor moments. Blending soulful Yoruba-infused melodies with hypnotic rhythms, the track captures the overwhelming rush of pure joy, emotional freedom, and unapologetic bliss.</p>
-        <p style="margin-top: 1rem;">From smooth, rhythmic verses to infectious choruses, <strong style="color: var(--accent-gold);">ECSTACY</strong> delivers a feel-good vibe that’s all about letting go.</p>
+        <h3><i class="fas fa-moon"></i> HAYWISE: THE JOURNEY</h3>
+        <p> Haywise_official is a Nigerian singer and songwriter whose music often blends Afrobeats, Amapiano, and Hip-hop. His most recent work includes the You - EP, released in 2025. </p>
+        <div class="album-list">
+          <span class="album-badge">🎵 Ecstacy (2026)</span>
+          <span class="album-badge">🎵 Jailer (2025)</span>
+          <span class="album-badge">🎵 For The Road EP (2024)</span>
+          <span class="album-badge">🎵 Ballin (2023)</span>
+        </div>
+        <p style="margin-top: 1rem;">Each release captures raw emotion, dancefloor energy, and authentic storytelling. Press play and enter his world.</p>
       </div>
       <div class="lyric-snippet fade-right">
-        <i class="fas fa-music"></i> <strong>LYRIC SNIPPET</strong><br>
-        “Hello what's your name?<br> Gimme your number baby what you say?<br> I wanna be with you, No be fallacy<br> Oh baby duro na, Maje n tete de”<br>
-        <span style="font-size:0.7rem; margin-top:12px; display:block;">#Ecstacy #HaywiseOfficial</span>
+        <i class="fas fa-quote-left"></i> <strong>CRITICAL ACCLAIM</strong><br>
+        “Haywise delivers a hypnotic fusion that stays with you long after the track ends.” — <em>Afrobeat Digest</em><br><br>
+        “A fresh voice in global fusion — Ecstacy is pure euphoria.” — <em>Pulse Magazine</em>
+        <span style="font-size:0.7rem; margin-top:12px; display:block;">#Haywise #AfroFusion #NewMusic</span>
       </div>
     </div>
   </section>
 
-  <!-- CONTACT -->
+  <!-- CONTACT & BOOKING -->
   <section id="contact">
     <div class="contact-section">
       <div class="contact-flex">
         <div class="contact-info fade-left">
           <h3>BOOK HAYWISE <i class="fas fa-hand-peace"></i></h3>
-          <p>For features, live shows, sync licensing — drop a message.</p>
+          <p>For features, live performances, sync licensing, or press inquiries.</p>
           <div class="contact-detail"><i class="fas fa-envelope"></i> booking@haywiseofficial.com</div>
           <div style="margin: 1.5rem 0 0.5rem;">
             <p style="color: var(--accent-gold);"><i class="fas fa-share-alt"></i> FOLLOW HAYWISE</p>
@@ -619,30 +664,28 @@
       <a href="https://tiktok.com/@haywise.music" target="_blank" class="social-icon"><i class="fab fa-tiktok"></i></a>
       <a href="https://twitter.com/haywise_off" target="_blank" class="social-icon"><i class="fab fa-twitter"></i></a>
     </div>
-    <p>◈ ECSTACY / HAYWISE OFFICIAL — Stream everywhere. Let the rhythm take control. ◈</p>
+    <p>◈ HAYWISE OFFICIAL — All music, all vibes. Stream the full catalog. ◈</p>
   </footer>
 </div>
 
 <script>
-  // ========== SMOOTH SCROLL REVEAL (Intersection Observer) ==========
+  // Intersection Observer for scroll animations
   const revealElements = document.querySelectorAll('.fade-up, .fade-left, .fade-right, .scale-in');
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('revealed');
-        observer.unobserve(entry.target); // once revealed, stop observing
+        observer.unobserve(entry.target);
       }
     });
   }, { threshold: 0.12, rootMargin: "0px 0px -30px 0px" });
   revealElements.forEach(el => observer.observe(el));
-  // Also ensure header/hero elements reveal quickly
   document.querySelectorAll('.hero-content .fade-up, .header.fade-up').forEach(el => observer.observe(el));
 
-  // ========== WAVE VISUALIZER ==========
+  // WAVE VISUALIZER
   const waveCanvas = document.getElementById('waveCanvas');
   const ctxWave = waveCanvas.getContext('2d');
-  let waveAnimId = null;
-  let waveActive = true;
+  let waveAnimId = null, waveActive = true;
   function resizeWave() { const w = waveCanvas.parentElement.clientWidth; waveCanvas.width = w; waveCanvas.height = 130; }
   window.addEventListener('resize', resizeWave);
   resizeWave();
@@ -676,7 +719,7 @@
   document.getElementById('stopWaveBtn').addEventListener('click', () => { if (waveAnimId) cancelAnimationFrame(waveAnimId); waveActive = false; waveBars.fill(0.1); drawWave(); });
   waveActive = true; animateWave();
 
-  // ========== RING VISUALIZER ==========
+  // RING VISUALIZER
   const ringCanvas = document.getElementById('ringCanvas');
   const ctxRing = ringCanvas.getContext('2d');
   let ringAnimId = null, ringActive = true, angleOffset = 0;
@@ -721,9 +764,9 @@
   document.getElementById('stopRingBtn').addEventListener('click', () => { if (ringAnimId) cancelAnimationFrame(ringAnimId); ringActive = false; ringAmplitudes.fill(0.25); drawRing(); });
   ringActive = true; animateRing();
 
-  // YouTube cards placeholder links
-  document.getElementById('youtubeCardLeft').addEventListener('click', () => window.open('https://youtu.be/9I8xndQCSx0?si=Yd1eg6fCN88JN-71', '_blank'));
-  document.getElementById('youtubeCardRight').addEventListener('click', () => window.open('https://youtu.be/iIc0oSF0Xns?si=5v4Vd4Vvnq3ztXZX'));
+  // Review image cards: open external review links (or YouTube links if needed)
+  document.getElementById('reviewCardLeft').addEventListener('click', () => window.open('https://www.youtube.com/watch?v=aYy9-mZSGIA&list=RDaYy9-mZSGIA&start_radio=1', '_blank'));
+  document.getElementById('reviewCardRight').addEventListener('click', () => window.open('https://youtu.be/iIc0oSF0Xns?si=5v4Vd4Vvnq3ztXZX', '_blank'));
 
   // Booking form
   document.getElementById('bookingForm').addEventListener('submit', (e) => {
@@ -734,6 +777,10 @@
     alert(`✅ Thanks ${name}! Your inquiry has been received.`);
     e.target.reset();
   });
+
+  // Logo image can be replaced by actual file. For demo, it's placeholder but you can replace src.
+  // Optional: Replace logo image with actual logo file
+  // document.getElementById('artistLogo').src = "YOUR_LOGO.png";
 </script>
 </body>
 </html>
