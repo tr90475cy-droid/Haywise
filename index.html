@@ -4,9 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Haywise Official | Music & Visuals</title>
-  <!-- MODERN FONTS: clean sans + elegant serif (less playful, more refined) -->
+  <!-- MODERN FONTS -->
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
-  <!-- Font Awesome 6 -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
     * {
@@ -44,14 +43,13 @@
       overflow-x: hidden;
     }
 
-    /* refined headings */
     h1, h2, h3, .logo, .section-title, .story-text h3, .contact-info h3 {
       font-family: 'Cormorant Garamond', serif;
       font-weight: 500;
       letter-spacing: -0.01em;
     }
 
-    /* ========== SMOOTH SCROLL + REVEAL ANIMATIONS ========== */
+    /* scroll reveal */
     .fade-up {
       opacity: 0;
       transform: translateY(40px);
@@ -89,7 +87,7 @@
       transform: scale(1);
     }
 
-    /* Hero Background with Artist Image */
+    /* Hero Background */
     .hero-bg {
       position: relative;
       min-height: 100vh;
@@ -119,7 +117,7 @@
       padding: 0 2rem;
     }
 
-    /* Header with Logo & Navigation */
+    /* Header */
     .header {
       padding: 2rem 0 1.5rem;
       display: flex;
@@ -287,78 +285,53 @@
       margin-right: 0.6rem;
     }
 
-    /* DUAL VISUALIZER */
-    .visualizer-duo {
+    /* MINI VISUALIZERS - no container card, just raw small animation */
+    .mini-viz-row {
       display: flex;
-      flex-wrap: wrap;
+      justify-content: center;
       gap: 2rem;
-      margin: 2rem 0 3rem;
+      margin: 1rem 0 2rem;
+      flex-wrap: wrap;
     }
-    .viz-card {
-      flex: 1;
-      min-width: 260px;
-      background: rgba(0, 0, 0, 0.55);
-      backdrop-filter: blur(12px);
-      border-radius: var(--radius-lg);
-      border: 1px solid rgba(212, 175, 55, 0.4);
-      padding: 1.5rem 1rem;
-      transition: all 0.3s;
-    }
-    .viz-card:hover {
-      border-color: var(--accent-gold);
-      transform: translateY(-5px);
-    }
-    .viz-title {
+    .viz-item {
       text-align: center;
-      font-weight: 600;
+      background: rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(4px);
+      border-radius: 28px;
+      padding: 0.5rem 1rem;
+      border: 1px solid rgba(212, 175, 55, 0.3);
+    }
+    .viz-label {
+      font-size: 0.65rem;
+      letter-spacing: 1px;
       color: var(--accent-gold);
-      margin-bottom: 1rem;
-      font-size: 0.9rem;
-      font-family: 'Plus Jakarta Sans', sans-serif;
+      margin-bottom: 0.25rem;
+      font-weight: 600;
     }
-    .canvas-wrapper {
-      display: flex;
-      justify-content: center;
+    #miniWaveCanvas {
+      width: 220px;
+      height: 48px;
+      background: rgba(0, 0, 0, 0.5);
+      border-radius: 24px;
+      display: block;
     }
-    #waveCanvas {
-      width: 100%;
-      height: 130px;
-      background: rgba(10, 12, 18, 0.6);
-      border-radius: 20px;
-    }
-    #ringCanvas {
-      width: 180px;
-      height: 180px;
-      background: rgba(10, 12, 18, 0.4);
+    #miniRingCanvas {
+      width: 56px;
+      height: 56px;
+      background: rgba(0, 0, 0, 0.4);
       border-radius: 50%;
+      display: block;
     }
-    .viz-control {
-      display: flex;
-      justify-content: center;
-      gap: 16px;
-      margin-top: 1rem;
-    }
-    .viz-btn {
-      background: rgba(212, 175, 55, 0.15);
-      border: 1px solid var(--accent-gold);
-      color: var(--accent-gold);
-      padding: 6px 18px;
-      border-radius: 40px;
-      font-size: 0.7rem;
-      cursor: pointer;
-      transition: var(--transition);
-      font-weight: 600;
-    }
-    .viz-btn:hover {
-      background: var(--accent-gold);
-      color: #0a0c10;
+    @media (max-width: 550px) {
+      #miniWaveCanvas { width: 160px; height: 42px; }
+      #miniRingCanvas { width: 48px; height: 48px; }
     }
 
-    /* SONG REVIEW IMAGE CARDS (replacing video with review images) */
+    /* YOUTUBE PREVIEW CARDS - interactive, show video preview, open youtube on click */
     .media-showcase {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 1.8rem;
+      gap: 2rem;
       margin: 2rem 0 3rem;
     }
     .media-card {
@@ -375,19 +348,26 @@
       border-color: var(--accent-gold);
       box-shadow: 0 20px 35px rgba(0,0,0,0.5);
     }
-    .media-img {
+    .video-preview {
+      position: relative;
       width: 100%;
       aspect-ratio: 16 / 9;
-      object-fit: cover;
-      display: block;
+      background: #000;
+    }
+    .video-preview iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      pointer-events: none; /* card click triggers YouTube link, but preview visible */
     }
     .media-label {
-      padding: 1rem;
+      padding: 0.9rem;
       text-align: center;
       font-weight: 600;
-      background: rgba(0,0,0,0.5);
+      background: rgba(0,0,0,0.7);
       color: var(--accent-gold);
       font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.8rem;
     }
 
     /* Platform grid */
@@ -415,7 +395,7 @@
     .platform-icon { font-size: 2rem; color: var(--accent-gold); margin-bottom: 0.5rem; }
     .platform-name { font-weight: 600; font-size: 0.85rem; }
 
-    /* Story section - now describing full discography */
+    /* Story Section */
     .song-story {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -458,6 +438,17 @@
       font-style: italic;
       border-left: 4px solid var(--accent-gold);
       color: #e6e9f0;
+    }
+
+    /* EP Highlight Card */
+    .ep-highlight {
+      margin: 2rem auto 0;
+      text-align: center;
+      background: radial-gradient(ellipse at center, rgba(212,175,55,0.12), transparent);
+      border-radius: 60px;
+      padding: 1.5rem 1rem;
+      max-width: 600px;
+      border: 1px solid rgba(212,175,55,0.3);
     }
 
     /* Contact */
@@ -526,21 +517,18 @@
 
     @media (max-width: 900px) {
       .hero-content h1 { font-size: 3.2rem; }
-      .song-story, .contact-flex, .media-showcase, .visualizer-duo { grid-template-columns: 1fr; flex-direction: column; }
+      .song-story, .contact-flex, .media-showcase { grid-template-columns: 1fr; }
       .container { padding: 0 1.2rem; }
       .logo-img { height: 38px; }
     }
-    .text-center { text-align: center; }
   </style>
 </head>
 <body>
 
-<!-- Hero Section -->
 <div class="hero-bg" id="home">
   <div class="container">
     <header class="header fade-up">
       <div class="logo">
-        <!-- HAYWISE LOGO PLACEHOLDER (replace with actual logo image) -->
         <img src="NAME-CRAFT-PNG1.png" alt="Haywise Logo" class="logo-img" id="artistLogo">
         <span class="logo-text">HAYWISE_OFFICIAL</span>
       </div>
@@ -555,7 +543,7 @@
       <div class="badge fade-up"><i class="fas fa-microphone-alt"></i> FULL DISCOGRAPHY</div>
       <h1 class="fade-up">THE <span>ARTIST</span></h1>
       <div class="artist-tag fade-up">Haywise Official · Afro-Fusion Visionary</div>
-      <p class="fade-up">Explore the sonic universe of Haywise — a blend of Yoruba soul, contemporary Afro-fusion, and hypnotic rhythms. From "Ecstacy" to future anthems, every track is a journey into emotion and groove.</p>
+      <p class="fade-up">Explore the sonic universe of Haywise — Yoruba soul, Afro-fusion, hypnotic rhythms. From "You - EP" to future anthems, every track is a journey.</p>
       <div class="btn-group fade-up">
         <a href="#stream" class="btn btn-primary"><i class="fas fa-play"></i> DISCOVER MUSIC</a>
         <a href="#contact" class="btn btn-outline"><i class="fas fa-calendar-alt"></i> BOOKING</a>
@@ -565,33 +553,35 @@
 </div>
 
 <div class="container">
-  <!-- DUAL VISUALIZERS (keep animations) -->
-  <div class="visualizer-duo">
-    <div class="viz-card scale-in">
-      <div class="viz-title"><i class="fas fa-chart-line"></i> ENERGY WAVE</div>
-      <div class="canvas-wrapper"><canvas id="waveCanvas" width="800" height="130" style="width:100%; height:130px;"></canvas></div>
-      <div class="viz-control"><button id="playWaveBtn" class="viz-btn"><i class="fas fa-play"></i> ANIMATE</button><button id="stopWaveBtn" class="viz-btn"><i class="fas fa-stop"></i> STOP</button></div>
+  <!-- MINI VISUALIZERS: no extra container box, just keep them small and always animating -->
+  <div class="mini-viz-row">
+    <div class="viz-item">
+      <div class="viz-label"><i class="fas fa-waveform"></i> ENERGY WAVE</div>
+      <canvas id="miniWaveCanvas" width="300" height="48" style="width:100%; max-width:240px; height:48px;"></canvas>
     </div>
-    <div class="viz-card scale-in">
-      <div class="viz-title"><i class="fas fa-circle-notch"></i> SPECTRUM RING</div>
-      <div class="canvas-wrapper"><canvas id="ringCanvas" width="200" height="200" style="width:180px; height:180px;"></canvas></div>
-      <div class="viz-control"><button id="playRingBtn" class="viz-btn"><i class="fas fa-play"></i> ROTATE</button><button id="stopRingBtn" class="viz-btn"><i class="fas fa-stop"></i> FREEZE</button></div>
+    <div class="viz-item">
+      <div class="viz-label"><i class="fas fa-saturn"></i> SPECTRUM RING</div>
+      <canvas id="miniRingCanvas" width="64" height="64" style="width:56px; height:56px;"></canvas>
     </div>
   </div>
 
-  <!-- SONG REVIEW IMAGES (replacing video section) -->
+  <!-- YOUTUBE VIDEO PREVIEW CARDS (click to open full YouTube video) -->
   <div class="media-showcase" id="reviews">
     <div class="media-card fade-left" id="reviewCardLeft">
-      <img class="media-img" src="image.png" alt="Song Review Image 1">
-      <div class="media-label"><i class="fas fa-newspaper"></i> ECSTACY — SONG REVIEW</div>
+      <div class="video-preview">
+        <iframe src="https://www.youtube.com/embed/aYy9-mZSGIA?rel=0&modestbranding=1&controls=0&showinfo=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+      <div class="media-label"><i class="fab fa-youtube"></i> "ECSTACY" — SONG REVIEW / OFFICIAL VISUALIZER</div>
     </div>
     <div class="media-card fade-right" id="reviewCardRight">
-      <img class="media-img" src="Screenshot 2026-04-22 121425.png" alt="Song Review Image 2">
-      <div class="media-label"><i class="fas fa-star"></i> " JAILER VISUALIZER " </div>
+      <div class="video-preview">
+        <iframe src="https://www.youtube.com/embed/iIc0oSF0Xns?rel=0&modestbranding=1&controls=0&showinfo=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+      <div class="media-label"><i class="fas fa-music"></i> "JAILER" — VISUALIZER + OFFICIAL REVIEW</div>
     </div>
   </div>
 
-  <!-- STREAMING SECTION (all albums / music) -->
+  <!-- STREAMING SECTION + MY EP (YOU) integration -->
   <section id="stream">
     <div class="section-title fade-up"><i class="fas fa-music"></i> STREAM ALL ALBUMS & SINGLES</div>
     <div class="platform-grid">
@@ -604,32 +594,47 @@
       <a href="https://tidal.com/artist/10588376" target="_blank" class="platform-card scale-in"><div class="platform-icon"><i class="fas fa-water"></i></div><div class="platform-name">Tidal</div></a>
       <a href="https://music.youtube.com/search?q=haywise+official" target="_blank" class="platform-card scale-in"><div class="platform-icon"><i class="fab fa-youtube"></i></div><div class="platform-name">YouTube</div></a>
     </div>
+    
+    <!-- MY EP (YOU) HIGHLIGHT - replacing previous ecstacy mention with EP -->
+    <div class="ep-highlight scale-in">
+      <i class="fas fa-compact-disc" style="font-size: 2.2rem; color: var(--accent-gold);"></i>
+      <h3 style="font-family: 'Cormorant Garamond'; margin: 0.5rem 0; color: var(--accent-gold); font-size: 1.8rem;">MY EP ( YOU )</h3>
+      <p style="margin-bottom: 0.5rem;">The latest sonic chapter — intimate, bold, and deeply melodic.<br> Featuring "You", "Bad", "Woman", "Jailer" .</p>
+      <div class="album-list" style="justify-content: center;">
+        <span class="album-badge">🎧 YOU</span>
+        <span class="album-badge">🎧 BAD </span>
+        <span class="album-badge">🎧 WOMAN</span>
+        <span class="album-badge"> 🎧 JAILER</span>
+      </div>
+      <a href="https://open.spotify.com/artist/2IwiPvxH6yY4yPVXJVrtdZ" target="_blank" style="display: inline-block; margin-top: 1rem; color: var(--accent-gold); font-size: 0.8rem;"><i class="fas fa-play-circle"></i> Stream Now</a>
+    </div>
   </section>
 
-  <!-- BIOGRAPHY + DISCOGRAPHY SECTION -->
+  <!-- BIOGRAPHY + DISCOGRAPHY (updated with EP) -->
   <section id="story">
     <div class="song-story">
       <div class="story-text fade-left">
         <h3><i class="fas fa-moon"></i> HAYWISE: THE JOURNEY</h3>
-        <p> Haywise_official is a Nigerian singer and songwriter whose music often blends Afrobeats, Amapiano, and Hip-hop. His most recent work includes the You - EP, released in 2025. </p>
+        <p> Haywise_official is a Nigerian singer-songwriter blending Afrobeats, Amapiano, and Hip-hop. His newest masterpiece, <strong>"You - EP"</strong> (2025), is a reflection of raw emotion and growth. From dancefloor anthems to introspective ballads, Haywise's catalog continues to evolve.</p>
         <div class="album-list">
+          <span class="album-badge">🎵 You - EP (2025)</span>
           <span class="album-badge">🎵 Ecstacy (2026)</span>
           <span class="album-badge">🎵 Jailer (2025)</span>
           <span class="album-badge">🎵 For The Road EP (2024)</span>
           <span class="album-badge">🎵 Ballin (2023)</span>
         </div>
-        <p style="margin-top: 1rem;">Each release captures raw emotion, dancefloor energy, and authentic storytelling. Press play and enter his world.</p>
+        <p style="margin-top: 1rem;">Each release captures storytelling, groove, and soul. Press play and enter his universe.</p>
       </div>
       <div class="lyric-snippet fade-right">
         <i class="fas fa-quote-left"></i> <strong>CRITICAL ACCLAIM</strong><br>
-        “Haywise delivers a hypnotic fusion that stays with you long after the track ends.” — <em>Afrobeat Digest</em><br><br>
-        “A fresh voice in global fusion — Ecstacy is pure euphoria.” — <em>Pulse Magazine</em>
-        <span style="font-size:0.7rem; margin-top:12px; display:block;">#Haywise #AfroFusion #NewMusic</span>
+        “Haywise delivers hypnotic fusion — the You EP is his most personal work yet.” — <em>Afrobeat Digest</em><br><br>
+        “A fresh voice in global fusion, Ecstacy is euphoria; 'You' proves depth.” — <em>Pulse Magazine</em>
+        <span style="font-size:0.7rem; margin-top:12px; display:block;">#Haywise #YouEP #AfroFusion</span>
       </div>
     </div>
   </section>
 
-  <!-- CONTACT & BOOKING -->
+  <!-- CONTACT -->
   <section id="contact">
     <div class="contact-section">
       <div class="contact-flex">
@@ -664,7 +669,7 @@
       <a href="https://tiktok.com/@haywise.music" target="_blank" class="social-icon"><i class="fab fa-tiktok"></i></a>
       <a href="https://twitter.com/haywise_off" target="_blank" class="social-icon"><i class="fab fa-twitter"></i></a>
     </div>
-    <p>◈ HAYWISE OFFICIAL — All music, all vibes. Stream the full catalog. ◈</p>
+    <p>◈ HAYWISE OFFICIAL — Stream "You - EP" & full catalog. ◈</p>
   </footer>
 </div>
 
@@ -680,91 +685,85 @@
     });
   }, { threshold: 0.12, rootMargin: "0px 0px -30px 0px" });
   revealElements.forEach(el => observer.observe(el));
-  document.querySelectorAll('.hero-content .fade-up, .header.fade-up').forEach(el => observer.observe(el));
-
-  // WAVE VISUALIZER
-  const waveCanvas = document.getElementById('waveCanvas');
-  const ctxWave = waveCanvas.getContext('2d');
-  let waveAnimId = null, waveActive = true;
-  function resizeWave() { const w = waveCanvas.parentElement.clientWidth; waveCanvas.width = w; waveCanvas.height = 130; }
-  window.addEventListener('resize', resizeWave);
-  resizeWave();
-  const barCount = 48;
-  let waveBars = Array(barCount).fill(0.15);
-  function updateWaveBars() {
-    for (let i = 0; i < barCount; i++) {
-      let target = 0.25 + 0.55 * (Math.sin(Date.now() * 0.0045 + i * 0.22) * 0.6 + Math.sin(Date.now() * 0.011 + i * 0.41) * 0.4);
-      target += Math.random() * 0.1;
-      target = Math.min(0.92, Math.max(0.12, target));
-      waveBars[i] = waveBars[i] * 0.9 + target * 0.1;
+  
+  // ---- MINI WAVE always animating (no stop button, just continuous) ----
+  const miniWaveCanvas = document.getElementById('miniWaveCanvas');
+  const ctxMiniWave = miniWaveCanvas.getContext('2d');
+  let miniWaveActive = true;
+  function resizeMiniWave() { 
+    const containerWidth = Math.min(miniWaveCanvas.parentElement.clientWidth, 240);
+    miniWaveCanvas.width = containerWidth;
+    miniWaveCanvas.height = 48;
+  }
+  window.addEventListener('resize', resizeMiniWave);
+  resizeMiniWave();
+  const miniBarCount = 28;
+  let miniBars = Array(miniBarCount).fill(0.2);
+  function updateMiniBars() {
+    for (let i = 0; i < miniBarCount; i++) {
+      let target = 0.3 + 0.6 * (Math.sin(Date.now() * 0.008 + i * 0.3) * 0.5 + Math.sin(Date.now() * 0.018 + i * 0.5) * 0.5);
+      target += Math.random() * 0.08;
+      target = Math.min(0.88, Math.max(0.15, target));
+      miniBars[i] = miniBars[i] * 0.92 + target * 0.08;
     }
   }
-  function drawWave() {
-    ctxWave.clearRect(0, 0, waveCanvas.width, waveCanvas.height);
-    const w = waveCanvas.width, h = waveCanvas.height;
-    const barWidth = w / barCount * 0.8, spacing = w / barCount * 0.2;
-    for (let i = 0; i < barCount; i++) {
-      const barHeight = Math.max(4, waveBars[i] * h * 0.85);
+  function drawMiniWave() {
+    if (!miniWaveActive) return;
+    ctxMiniWave.clearRect(0, 0, miniWaveCanvas.width, miniWaveCanvas.height);
+    const w = miniWaveCanvas.width, h = miniWaveCanvas.height;
+    const barWidth = w / miniBarCount * 0.7, spacing = w / miniBarCount * 0.3;
+    for (let i = 0; i < miniBarCount; i++) {
+      const barHeight = Math.max(3, miniBars[i] * h * 0.7);
       const x = i * (barWidth + spacing);
-      const grad = ctxWave.createLinearGradient(0, h - barHeight, 0, h);
-      grad.addColorStop(0, '#d4af37'); grad.addColorStop(1, '#f9e186');
-      ctxWave.fillStyle = grad;
-      ctxWave.shadowBlur = 6; ctxWave.shadowColor = '#d4af37aa';
-      ctxWave.fillRect(x, h - barHeight, barWidth, barHeight);
+      ctxMiniWave.fillStyle = '#d4af37';
+      ctxMiniWave.shadowBlur = 2; ctxMiniWave.shadowColor = '#e8c45a';
+      ctxMiniWave.fillRect(x, h - barHeight, barWidth, barHeight);
     }
-    ctxWave.shadowBlur = 0;
+    ctxMiniWave.shadowBlur = 0;
   }
-  function animateWave() { if (!waveActive) return; updateWaveBars(); drawWave(); waveAnimId = requestAnimationFrame(animateWave); }
-  document.getElementById('playWaveBtn').addEventListener('click', () => { if (!waveActive) { waveActive = true; animateWave(); } });
-  document.getElementById('stopWaveBtn').addEventListener('click', () => { if (waveAnimId) cancelAnimationFrame(waveAnimId); waveActive = false; waveBars.fill(0.1); drawWave(); });
-  waveActive = true; animateWave();
+  function animateMiniWave() { if (!miniWaveActive) return; updateMiniBars(); drawMiniWave(); requestAnimationFrame(animateMiniWave); }
+  animateMiniWave();
 
-  // RING VISUALIZER
-  const ringCanvas = document.getElementById('ringCanvas');
-  const ctxRing = ringCanvas.getContext('2d');
-  let ringAnimId = null, ringActive = true, angleOffset = 0;
-  const ringsCount = 24;
-  let ringAmplitudes = Array(ringsCount).fill(0.2);
-  ringCanvas.width = 200; ringCanvas.height = 200;
-  function updateRing() {
-    angleOffset += 0.008;
-    for (let i = 0; i < ringsCount; i++) {
-      let dynamic = 0.3 + 0.5 * (Math.sin(Date.now() * 0.005 + i * 0.5) * 0.7 + Math.cos(Date.now() * 0.009 + i * 0.3) * 0.3);
-      dynamic += Math.sin(angleOffset + i) * 0.1;
-      dynamic = Math.min(0.95, Math.max(0.2, dynamic));
-      ringAmplitudes[i] = ringAmplitudes[i] * 0.92 + dynamic * 0.08;
+  // ---- MINI RING always animating ----
+  const miniRingCanvas = document.getElementById('miniRingCanvas');
+  const ctxRingMini = miniRingCanvas.getContext('2d');
+  let miniRingActive = true, ringAngle = 0;
+  const miniRingCount = 16;
+  let miniRingAmp = Array(miniRingCount).fill(0.25);
+  miniRingCanvas.width = 64; miniRingCanvas.height = 64;
+  function updateMiniRing() {
+    ringAngle += 0.012;
+    for (let i = 0; i < miniRingCount; i++) {
+      let dyn = 0.35 + 0.55 * (Math.sin(Date.now() * 0.007 + i * 0.6) * 0.6 + Math.cos(Date.now() * 0.013 + i * 0.4) * 0.4);
+      dyn = Math.min(0.85, Math.max(0.2, dyn));
+      miniRingAmp[i] = miniRingAmp[i] * 0.92 + dyn * 0.08;
     }
   }
-  function drawRing() {
-    ctxRing.clearRect(0, 0, ringCanvas.width, ringCanvas.height);
-    const cx = ringCanvas.width/2, cy = ringCanvas.height/2;
-    const baseRadius = 48, maxExtra = 38;
-    for (let i = 0; i < ringsCount; i++) {
-      const angle = (i / ringsCount) * Math.PI * 2 + angleOffset;
-      const radius = baseRadius + ringAmplitudes[i] * maxExtra;
+  function drawMiniRing() {
+    if (!miniRingActive) return;
+    ctxRingMini.clearRect(0, 0, miniRingCanvas.width, miniRingCanvas.height);
+    const cx = 32, cy = 32;
+    const baseR = 14, maxExtraR = 12;
+    for (let i = 0; i < miniRingCount; i++) {
+      const angle = (i / miniRingCount) * Math.PI * 2 + ringAngle;
+      const radius = baseR + miniRingAmp[i] * maxExtraR;
       const x = cx + Math.cos(angle) * radius, y = cy + Math.sin(angle) * radius;
-      const ix = cx + Math.cos(angle) * (baseRadius - 6), iy = cy + Math.sin(angle) * (baseRadius - 6);
-      ctxRing.beginPath(); ctxRing.moveTo(ix, iy); ctxRing.lineTo(x, y);
-      ctxRing.lineWidth = 3.5;
-      ctxRing.strokeStyle = `rgba(212, 175, 55, ${0.6 + ringAmplitudes[i] * 0.4})`;
-      ctxRing.shadowBlur = 8; ctxRing.shadowColor = '#e8c45a';
-      ctxRing.stroke();
-      ctxRing.beginPath(); ctxRing.arc(x, y, 3 + ringAmplitudes[i] * 2, 0, Math.PI*2);
-      ctxRing.fillStyle = `rgba(255, 215, 80, ${0.7 + ringAmplitudes[i]*0.3})`;
-      ctxRing.fill();
+      const ix = cx + Math.cos(angle) * (baseR - 3), iy = cy + Math.sin(angle) * (baseR - 3);
+      ctxRingMini.beginPath(); ctxRingMini.moveTo(ix, iy); ctxRingMini.lineTo(x, y);
+      ctxRingMini.lineWidth = 2;
+      ctxRingMini.strokeStyle = `rgba(212, 175, 55, 0.8)`;
+      ctxRingMini.stroke();
+      ctxRingMini.beginPath(); ctxRingMini.arc(x, y, 1.8 + miniRingAmp[i], 0, Math.PI*2);
+      ctxRingMini.fillStyle = `rgba(255, 215, 80, 0.9)`;
+      ctxRingMini.fill();
     }
-    ctxRing.beginPath(); ctxRing.arc(cx, cy, 28, 0, Math.PI*2);
-    ctxRing.fillStyle = 'rgba(212,175,55,0.15)'; ctxRing.fill();
-    ctxRing.beginPath(); ctxRing.arc(cx, cy, 22, 0, Math.PI*2);
-    ctxRing.fillStyle = '#d4af37'; ctxRing.shadowBlur = 12; ctxRing.fill();
-    ctxRing.shadowBlur = 0;
+    ctxRingMini.beginPath(); ctxRingMini.arc(cx, cy, 8, 0, Math.PI*2);
+    ctxRingMini.fillStyle = '#d4af37'; ctxRingMini.fill();
   }
-  function animateRing() { if (!ringActive) return; updateRing(); drawRing(); ringAnimId = requestAnimationFrame(animateRing); }
-  document.getElementById('playRingBtn').addEventListener('click', () => { if (!ringActive) { ringActive = true; animateRing(); } });
-  document.getElementById('stopRingBtn').addEventListener('click', () => { if (ringAnimId) cancelAnimationFrame(ringAnimId); ringActive = false; ringAmplitudes.fill(0.25); drawRing(); });
-  ringActive = true; animateRing();
+  function animateMiniRing() { if (!miniRingActive) return; updateMiniRing(); drawMiniRing(); requestAnimationFrame(animateMiniRing); }
+  animateMiniRing();
 
-  // Review image cards: open external review links (or YouTube links if needed)
+  // YouTube Preview Cards: open full video on click
   document.getElementById('reviewCardLeft').addEventListener('click', () => window.open('https://www.youtube.com/watch?v=aYy9-mZSGIA&list=RDaYy9-mZSGIA&start_radio=1', '_blank'));
   document.getElementById('reviewCardRight').addEventListener('click', () => window.open('https://youtu.be/iIc0oSF0Xns?si=5v4Vd4Vvnq3ztXZX', '_blank'));
 
@@ -777,10 +776,6 @@
     alert(`✅ Thanks ${name}! Your inquiry has been received.`);
     e.target.reset();
   });
-
-  // Logo image can be replaced by actual file. For demo, it's placeholder but you can replace src.
-  // Optional: Replace logo image with actual logo file
-  // document.getElementById('artistLogo').src = "YOUR_LOGO.png";
 </script>
 </body>
 </html>
